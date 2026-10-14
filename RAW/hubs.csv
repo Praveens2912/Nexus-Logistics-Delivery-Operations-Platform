@@ -1,0 +1,31 @@
+HUB_ID,HUB_NAME,CITY,STATE,HUB_TYPE,OPEN_DATE
+H0001,Chennai Hub 01,Chennai,Tamil Nadu,FULFILLMENT,2019-05-10
+H0002,Mumbai Hub 02,Mumbai,Maharashtra,DISTRIBUTION,2021-11-23
+H0003,Pune Hub 03,Pune,Maharashtra,FULFILLMENT,2019-08-31
+H0004,Pune Hub 04,Pune,Maharashtra,SORTING,2020-12-02
+H0005,Kolkata Hub 05,Kolkata,West Bengal,DISTRIBUTION,2021-01-02
+H0006,Bengaluru Hub 06,Bengaluru,Karnataka,DISTRIBUTION,2021-06-28
+H0007,Chennai Hub 07,Chennai,Tamil Nadu,FULFILLMENT,2020-04-05
+H0008,Bengaluru Hub 08,Bengaluru,Karnataka,SORTING,2019-04-12
+H0009,Coimbatore Hub 09,Coimbatore,Tamil Nadu,DISTRIBUTION,2018-10-29
+H0010,Bengaluru Hub 10,Bengaluru,Karnataka,DISTRIBUTION,2018-03-10
+H0011,Bengaluru Hub 11,Bengaluru,Karnataka,FULFILLMENT,2022-09-30
+H0012,Kolkata Hub 12,Kolkata,West Bengal,DISTRIBUTION,2021-05-09
+H0013,Hyderabad Hub 13,Hyderabad,Telangana,FULFILLMENT,2022-07-23
+H0014,Mumbai Hub 14,Mumbai,Maharashtra,FULFILLMENT,2024-06-19
+H0015,Bengaluru Hub 15,Bengaluru,Karnataka,SORTING,2022-05-18
+H0016,Mumbai Hub 16,Mumbai,Maharashtra,SORTING,2019-07-06
+H0017,Coimbatore Hub 17,Coimbatore,Tamil Nadu,SORTING,2024-02-20
+H0018,Coimbatore Hub 18,Coimbatore,Tamil Nadu,SORTING,2023-02-05
+H0019,Coimbatore Hub 19,Coimbatore,Tamil Nadu,FULFILLMENT,2019-05-06
+H0020,Coimbatore Hub 20,Coimbatore,Tamil Nadu,FULFILLMENT,2023-07-17
+H0021,Delhi Hub 21,Delhi,Delhi,DISTRIBUTION,2024-01-29
+H0022,Hyderabad Hub 22,Hyderabad,Telangana,SORTING,2020-09-30
+H0023,Bengaluru Hub 23,Bengaluru,Karnataka,SORTING,2023-03-24
+H0024,Kolkata Hub 24,Kolkata,West Bengal,DISTRIBUTION,2019-04-11
+H0025,Pune Hub 25,Pune,Maharashtra,SORTING,2023-05-03
+H0026,Pune Hub 26,Pune,Maharashtra,DISTRIBUTION,2022-07-11
+H0027,Pune Hub 27,Pune,Maharashtra,FULFILLMENT,2019-12-02
+H0028,Coimbatore Hub 28,Coimbatore,Tamil Nadu,DISTRIBUTION,2021-05-18
+H0029,Pune Hub 29,Pune,Maharashtra,FULFILLMENT,2018-07-05
+H0030,Bengaluru Hub 30,Bengaluru,Karnataka,SORTING,2021-06-28
