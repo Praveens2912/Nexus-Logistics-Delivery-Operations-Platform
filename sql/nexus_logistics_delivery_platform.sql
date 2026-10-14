@@ -145,3 +145,58 @@ SELECT
 FROM STAGING.STAGING_SHIPMENT_EVENTS
 GROUP BY EVENT_ID
 HAVING COUNT(*) > 1;
+
+
+
+-- ============================================================
+-- SECTION 05: CURATED LAYER
+-- Project: Nexus Logistics & Delivery Operations Platform
+-- Purpose: Store cleaned and validated business data
+-- ============================================================
+
+USE DATABASE NEXUS_LOGISTICS_DB;
+
+-- ------------------------------------------------------------
+-- 5.1 CURATED TABLE INVENTORY
+-- ------------------------------------------------------------
+
+SHOW TABLES IN SCHEMA NEXUS_LOGISTICS_DB.CURATED;
+
+
+-- ------------------------------------------------------------
+-- 5.2 CURATED CUSTOMER SUMMARY
+-- ------------------------------------------------------------
+
+SELECT
+    COUNT(*) AS TOTAL_CUSTOMERS,
+    COUNT(DISTINCT CUSTOMER_ID) AS UNIQUE_CUSTOMERS
+FROM NEXUS_LOGISTICS_DB.CURATED.CURATED_CUSTOMERS;
+
+
+-- ------------------------------------------------------------
+-- 5.3 CURATED SHIPMENT SUMMARY
+-- ------------------------------------------------------------
+
+SELECT
+    COUNT(*) AS TOTAL_SHIPMENTS,
+    COUNT(DISTINCT SHIPMENT_ID) AS UNIQUE_SHIPMENTS
+FROM NEXUS_LOGISTICS_DB.CURATED.CURATED_SHIPMENTS;
+
+
+-- ------------------------------------------------------------
+-- 5.4 CURATED DELIVERY ATTEMPT SUMMARY
+-- ------------------------------------------------------------
+
+SELECT
+    COUNT(*) AS TOTAL_DELIVERY_ATTEMPTS
+FROM NEXUS_LOGISTICS_DB.CURATED.CURATED_DELIVERY_ATTEMPTS;
+
+
+-- ------------------------------------------------------------
+-- 5.5 CURATED INVOICE SUMMARY
+-- ------------------------------------------------------------
+
+SELECT
+    COUNT(*) AS TOTAL_INVOICES,
+    ROUND(SUM(INVOICE_TOTAL), 2) AS TOTAL_INVOICE_AMOUNT
+FROM NEXUS_LOGISTICS_DB.CURATED.CURATED_INVOICES;
