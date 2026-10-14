@@ -284,3 +284,108 @@ GROUP BY
 -- ------------------------------------------------------------
 
 SHOW VIEWS IN SCHEMA NEXUS_LOGISTICS_DB.ANALYTICS;
+
+
+-- ============================================================
+-- SECTION 07: DATA QUALITY IMPROVEMENTS
+-- Project: Nexus Logistics & Delivery Operations Platform
+-- Purpose: Document data quality issues identified and handled
+-- ============================================================
+
+-- ------------------------------------------------------------
+-- 7.1 CUSTOMER DATA QUALITY
+-- ------------------------------------------------------------
+-- Source records: 15,000
+-- Curated records: 14,992
+--
+-- Issues identified:
+-- 1. Five customers had missing email addresses.
+-- 2. One customer had an invalid email address.
+-- 3. One customer had an invalid phone number.
+-- 4. One customer had an invalid active-status value.
+--
+-- These records were classified during staging.
+-- Curated customer records were selected based on data quality.
+
+
+-- ------------------------------------------------------------
+-- 7.2 SHIPMENT DATA QUALITY
+-- ------------------------------------------------------------
+-- Raw records: 50,001
+-- Staging records: 50,000
+-- Curated records: 49,999
+--
+-- Issues identified:
+-- 1. Duplicate shipment ID S000001501 was identified.
+-- 2. Shipment S000001008 referenced invalid origin hub H9999.
+-- 3. Shipment S000001006 contained an invalid expected delivery date.
+-- 4. Two delivered shipments had missing actual delivery dates.
+--
+-- The duplicate was removed during staging.
+-- The shipment referencing the invalid origin hub was excluded
+-- from the curated shipment table.
+-- The invalid date was converted to NULL during staging.
+-- Missing actual delivery dates were retained as review cases.
+
+
+-- ------------------------------------------------------------
+-- 7.3 DELIVERY ATTEMPT DATA QUALITY
+-- ------------------------------------------------------------
+-- Raw records: 18,001
+-- Staging records after deduplication: 18,000
+-- Curated records: 14,298
+--
+-- Issues identified:
+-- 1. Duplicate attempt ID A000000011 was removed.
+-- 2. One invalid shipment reference was identified.
+-- 3. One invalid attempt date was identified.
+-- 4. One record contained a MAYBE proof-of-delivery value.
+-- 5. Records with non-valid quality statuses were excluded
+--    from the curated delivery attempt table.
+
+
+-- ------------------------------------------------------------
+-- 7.4 SHIPMENT EVENT DATA QUALITY
+-- ------------------------------------------------------------
+-- Raw records: 79,818
+-- Curated records: 79,816
+--
+-- Issues identified:
+-- 1. Duplicate event ID E0000000160 was identified.
+-- 2. One missing or invalid timestamp was identified.
+--
+-- Missing hub IDs and driver IDs were reviewed in context.
+-- These fields were not automatically treated as invalid
+-- because they may be optional for certain event types.
+
+
+-- ------------------------------------------------------------
+-- 7.5 INVOICE DATA QUALITY
+-- ------------------------------------------------------------
+-- Raw records: 47,001
+-- Curated records: 46,998
+--
+-- Issues identified:
+-- 1. A missing fuel surcharge was identified during staging.
+-- 2. An invalid shipment reference was reported during review.
+--
+-- Invoice records were filtered during curated processing
+-- using the staging quality status and shipment reference.
+
+
+-- ------------------------------------------------------------
+-- 7.6 DATA QUALITY SUMMARY
+-- ------------------------------------------------------------
+-- Confirmed duplicate identifiers handled:
+-- 1. Shipment ID: S000001501
+-- 2. Delivery attempt ID: A000000011
+-- 3. Shipment event ID: E0000000160
+--
+-- Additional invalid and incomplete records were identified
+-- and classified during staging.
+--
+-- Important:
+-- Do not interpret every difference between raw and curated
+-- counts as a duplicate or invalid record.
+-- Counts can differ because of deduplication, quality filters
+-- and referential integrity rules.
