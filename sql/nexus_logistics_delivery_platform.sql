@@ -200,3 +200,87 @@ SELECT
     COUNT(*) AS TOTAL_INVOICES,
     ROUND(SUM(INVOICE_TOTAL), 2) AS TOTAL_INVOICE_AMOUNT
 FROM NEXUS_LOGISTICS_DB.CURATED.CURATED_INVOICES;
+
+
+
+-- ============================================================
+-- SECTION 06: ANALYTICS VIEWS
+-- Project: Nexus Logistics & Delivery Operations Platform
+-- Purpose: Provide business-ready summaries for reporting
+-- ============================================================
+
+USE DATABASE NEXUS_LOGISTICS_DB;
+
+-- ------------------------------------------------------------
+-- 6.1 SHIPMENT PERFORMANCE
+-- Analyse shipment volumes and shipping fees by status
+-- and service level
+-- ------------------------------------------------------------
+
+CREATE OR REPLACE VIEW ANALYTICS.VW_SHIPMENT_PERFORMANCE AS
+SELECT
+    SHIPMENT_STATUS,
+    SERVICE_LEVEL,
+    COUNT(*) AS TOTAL_SHIPMENTS,
+    ROUND(AVG(WEIGHT_KG), 2) AS AVG_WEIGHT_KG,
+    ROUND(AVG(SHIPPING_FEE), 2) AS AVG_SHIPPING_FEE,
+    ROUND(SUM(SHIPPING_FEE), 2) AS TOTAL_SHIPPING_FEES
+FROM CURATED.CURATED_SHIPMENTS
+GROUP BY
+    SHIPMENT_STATUS,
+    SERVICE_LEVEL;
+
+
+-- ------------------------------------------------------------
+-- 6.2 DELIVERY PERFORMANCE
+-- Summarise delivery attempts by result
+-- ------------------------------------------------------------
+
+CREATE OR REPLACE VIEW ANALYTICS.VW_DELIVERY_PERFORMANCE AS
+SELECT
+    ATTEMPT_RESULT,
+    COUNT(*) AS TOTAL_ATTEMPTS,
+    COUNT(DISTINCT SHIPMENT_ID) AS UNIQUE_SHIPMENTS
+FROM CURATED.CURATED_DELIVERY_ATTEMPTS
+GROUP BY ATTEMPT_RESULT;
+
+
+-- ------------------------------------------------------------
+-- 6.3 INVOICE SUMMARY
+-- Analyse invoice counts and amounts by invoice status
+-- ------------------------------------------------------------
+
+CREATE OR REPLACE VIEW ANALYTICS.VW_INVOICE_SUMMARY AS
+SELECT
+    INVOICE_STATUS,
+    COUNT(*) AS TOTAL_INVOICES,
+    ROUND(SUM(INVOICE_TOTAL), 2) AS TOTAL_INVOICE_AMOUNT,
+    ROUND(AVG(INVOICE_TOTAL), 2) AS AVERAGE_INVOICE_AMOUNT
+FROM CURATED.CURATED_INVOICES
+GROUP BY INVOICE_STATUS;
+
+
+-- ------------------------------------------------------------
+-- 6.4 CUSTOMER SUMMARY
+-- Analyse customer activity by customer type and state
+-- ------------------------------------------------------------
+
+CREATE OR REPLACE VIEW ANALYTICS.VW_CUSTOMER_SUMMARY AS
+SELECT
+    CUSTOMER_TYPE,
+    STATE,
+    COUNT(*) AS TOTAL_CUSTOMERS,
+    COUNT_IF(IS_ACTIVE = 'TRUE') AS ACTIVE_CUSTOMERS,
+    COUNT_IF(IS_ACTIVE = 'FALSE') AS INACTIVE_CUSTOMERS
+FROM CURATED.CURATED_CUSTOMERS
+GROUP BY
+    CUSTOMER_TYPE,
+    STATE;
+
+
+-- ------------------------------------------------------------
+-- 6.5 VIEW INVENTORY
+-- List analytics views in the schema
+-- ------------------------------------------------------------
+
+SHOW VIEWS IN SCHEMA NEXUS_LOGISTICS_DB.ANALYTICS;
