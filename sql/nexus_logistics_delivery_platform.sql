@@ -62,6 +62,28 @@
  ---------------------------------------------------------------------
  This script documents the project implementation.
 
+
+/*====================================================================
+ SECTION 01 - DATABASE AND SCHEMA CONTEXT
+====================================================================*/
+
+USE DATABASE NEXUS_LOGISTICS_DB;
+
+-- Review the project schemas
+SHOW SCHEMAS IN DATABASE NEXUS_LOGISTICS_DB;
+
+-- Review tables in the RAW layer
+SHOW TABLES IN SCHEMA NEXUS_LOGISTICS_DB.RAW;
+
+-- Review tables in the STAGING layer
+SHOW TABLES IN SCHEMA NEXUS_LOGISTICS_DB.STAGING;
+
+-- Review tables in the CURATED layer
+SHOW TABLES IN SCHEMA NEXUS_LOGISTICS_DB.CURATED;
+
+-- Review views in the ANALYTICS layer
+SHOW VIEWS IN SCHEMA NEXUS_LOGISTICS_DB.ANALYTICS;
+
  Review CREATE OR REPLACE statements carefully before execution.
  They can replace existing objects and overwrite their contents.
 
