@@ -88,3 +88,60 @@ SHOW VIEWS IN SCHEMA NEXUS_LOGISTICS_DB.ANALYTICS;
  They can replace existing objects and overwrite their contents.
 
 ====================================================================*/
+
+
+
+-- ============================================================
+-- SECTION 04: STAGING DATA QUALITY CHECKS
+-- Project: Nexus Logistics & Delivery Operations Platform
+-- Purpose: Review data quality issues identified during staging
+-- ============================================================
+
+USE DATABASE NEXUS_LOGISTICS_DB;
+
+-- ------------------------------------------------------------
+-- 4.1 CUSTOMER DATA QUALITY SUMMARY
+-- ------------------------------------------------------------
+
+SELECT
+    DATA_QUALITY_STATUS,
+    COUNT(*) AS RECORD_COUNT
+FROM STAGING.STAGING_CUSTOMERS
+GROUP BY DATA_QUALITY_STATUS
+ORDER BY RECORD_COUNT DESC;
+
+
+-- ------------------------------------------------------------
+-- 4.2 SHIPMENT DUPLICATE CHECK
+-- ------------------------------------------------------------
+
+SELECT
+    SHIPMENT_ID,
+    COUNT(*) AS RECORD_COUNT
+FROM STAGING.STAGING_SHIPMENTS
+GROUP BY SHIPMENT_ID
+HAVING COUNT(*) > 1;
+
+
+-- ------------------------------------------------------------
+-- 4.3 DELIVERY ATTEMPT DATA QUALITY SUMMARY
+-- ------------------------------------------------------------
+
+SELECT
+    DATA_QUALITY_STATUS,
+    COUNT(*) AS RECORD_COUNT
+FROM STAGING.STAGING_DELIVERY_ATTEMPTS
+GROUP BY DATA_QUALITY_STATUS
+ORDER BY RECORD_COUNT DESC;
+
+
+-- ------------------------------------------------------------
+-- 4.4 SHIPMENT EVENT DUPLICATE CHECK
+-- ------------------------------------------------------------
+
+SELECT
+    EVENT_ID,
+    COUNT(*) AS RECORD_COUNT
+FROM STAGING.STAGING_SHIPMENT_EVENTS
+GROUP BY EVENT_ID
+HAVING COUNT(*) > 1;
